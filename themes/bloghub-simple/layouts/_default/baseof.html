@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+<head>
+    <meta charset="utf-8">
+    <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {{ block "meta" . }}{{ end }}
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/modern-normalize@1.0.0/modern-normalize.css"
+          integrity="sha256-BbyEhHXSeWdk9E/rYP+0/99ZsKV4VUyda9IFMnHq4P8=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.css"
+          integrity="sha256-cf0utJyD3jlnqw2/IdG9Ai3UyTLsW10Z8nXcCbHhfDI=" crossorigin="anonymous">
+
+    {{ $style := resources.Get "sass/app.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
+    <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
+</head>
+<body>
+<header class="hero">
+    <div class="container">
+        <nav class="menu">
+            <ul>
+                <li><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a></li>
+            </ul>
+            <ul>
+                <li><a href="{{ "posts" | absLangURL}}">文章</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    {{ if and (.Title) (ne .Site.Title .Title) }}
+        <h1 class="title">{{ .Title }}</h1>
+    {{ end }}
+</header>
+
+<section class="section">
+    <div class="container">
+        {{ block "main" . }}
+            Default
+        {{ end }}
+    </div>
+</section>
+</body>
+</html>

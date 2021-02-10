@@ -1,0 +1,26 @@
+{{ define "meta" }}
+<meta name="description" content="{{ .Description }}">
+{{ end }}
+
+{{ define "title" }}
+{{ if .Title }}
+{{ .Title }} &ndash;
+{{ end }}
+
+{{ .Site.Title }}
+
+{{ end }}
+
+{{ define "main" }}
+
+<main class="markdown-body">
+    {{ .Content }}
+
+    {{ if .Date }}
+        <p class="copyright">
+            发布于 {{ .PublishDate.Format "2006-01-02 15:04" }}
+        </p>
+    {{ end }}
+</main>
+
+{{ end }}

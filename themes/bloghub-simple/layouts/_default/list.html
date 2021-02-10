@@ -1,0 +1,27 @@
+{{ define "title" }}
+    {{ if .Title }}
+        {{ .Title }} &ndash;
+    {{ end }}
+
+    {{ .Site.Title }}
+{{ end }}
+
+{{ define "main" }}
+    {{ if .Content }}
+        <main class="markdown-body">
+            {{ .Content }}
+        </main>
+    {{ else }}
+        <main class="articles">
+            {{ range .Pages }}
+                <div class="article">
+                    <a class="title" href="{{ .Permalink }}">{{ .Title }}</a>
+
+                    {{ if not .PublishDate.IsZero }}
+                        <p class="description">发布于 {{ .PublishDate.Format "2006-01-02" }}</p>
+                    {{ end }}
+                </div>
+            {{ end }}
+        </main>
+    {{ end }}
+{{ end }}

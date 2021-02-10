@@ -1,0 +1,1 @@
+这是 BlogHub 预设的 bloghub-simple 模板，无需设置就可以开始写作，用于快速体验 BlogHub 的 Hugo 渲染效果。
